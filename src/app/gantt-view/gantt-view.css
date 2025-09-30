@@ -1,0 +1,129 @@
+/* gantt 容器 */
+#gantt_here {
+  width: 100%;
+  height: 100%;
+  min-height: 600px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background-color: #fafafa;
+  border-radius: 20px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* 任務條 (HTML 元素) - 使用更強的選擇器 */
+.gantt_task_line.task-done,
+.gantt_task_line[data-task-class="task-done"] {
+  background-color: #4caf50 !important;
+  border-radius: 10px !important;
+  border: none !important;
+}
+
+.gantt_task_line.task-doing,
+.gantt_task_line[data-task-class="task-doing"] {
+  background-color: #ffc107 !important;
+  border-radius: 10px !important;
+  border: none !important;
+}
+
+.gantt_task_line.task-todo,
+.gantt_task_line[data-task-class="task-todo"] {
+  background-color: #bdbdbd !important;
+  border-radius: 10px !important;
+  border: none !important;
+}
+
+/* 任務進度條 (SVG 元素) - 使用更強的選擇器 */
+.gantt_task_progress.task-done,
+.gantt_task_progress[data-task-class="task-done"] {
+  fill: #2e7d32 !important;
+  rx: 10 !important;
+  ry: 10 !important;
+  transition: fill 0.3s ease;
+}
+
+.gantt_task_progress.task-doing,
+.gantt_task_progress[data-task-class="task-doing"] {
+  fill: #ff8f00 !important;
+  rx: 10 !important;
+  ry: 10 !important;
+  transition: fill 0.3s ease;
+}
+
+.gantt_task_progress.task-todo,
+.gantt_task_progress[data-task-class="task-todo"] {
+  fill: #9e9e9e !important;
+  rx: 10 !important;
+  ry: 10 !important;
+  transition: fill 0.3s ease;
+}
+
+/* 通用進度條樣式 - 強制覆蓋 */
+.gantt_task_progress {
+  rx: 10 !important;
+  ry: 10 !important;
+}
+
+/* 任務文字 */
+.gantt_task_content {
+  font-weight: 600;
+  color: #1c1c1e;
+  user-select: none;
+  font-size: 16px;
+  letter-spacing: 0.03em;
+  -webkit-font-smoothing: antialiased;
+  font-smooth: always;
+}
+
+/* 任務列表欄位標題 */
+.gantt_grid_head_cell {
+  background-color: #ffffff !important;
+  font-weight: 700;
+  color: #8e8e93;
+  font-size: 15px;
+  border-bottom: 1px solid #d1d1d6 !important;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* 任務條滑鼠滑過效果 */
+.gantt_task_line:hover {
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.15));
+  cursor: pointer;
+  transition: filter 0.3s ease, opacity 0.3s ease;
+  opacity: 0.9;
+}
+
+/* 強制樣式 - 針對特定狀態 */
+.gantt_task_line[data-progress="1"] {
+  background-color: #4caf50 !important;
+  border-radius: 10px !important;
+}
+
+.gantt_task_progress[data-progress="1"] {
+  fill: #2e7d32 !important;
+  rx: 10 !important;
+  ry: 10 !important;
+}
+
+.gantt_task_line[data-progress="0.5"] {
+  background-color: #ffc107 !important;
+  border-radius: 10px !important;
+}
+
+.gantt_task_progress[data-progress="0.5"] {
+  fill: #ff8f00 !important;
+  rx: 10 !important;
+  ry: 10 !important;
+}
+
+.gantt_task_line[data-progress="0"] {
+  background-color: #bdbdbd !important;
+  border-radius: 10px !important;
+}
+
+.gantt_task_progress[data-progress="0"] {
+  fill: #9e9e9e !important;
+  rx: 10 !important;
+  ry: 10 !important;
+}

@@ -1,0 +1,27 @@
+<div class="carousel-container">
+  <button class="btn prev-btn" (click)="prev()">‹</button>
+  <div class="carousel-wrapper">
+    <div
+      class="carousel-slide-wrapper"
+      *ngFor="let user of users; let i = index"
+      [ngStyle]="getSlideStyle(i)"
+      (click)="selectImage(i)"
+    >
+      <img
+        [src]="user.avatarUrl"
+        alt="{{ user.name }}"
+        class="carousel-slide"
+        [class.selected]="isSelected(i)"
+      />
+      <div class="user-name">{{ user.name }}</div>
+    </div>
+  </div>
+  <button class="btn next-btn" (click)="next()">›</button>
+  <button
+    class="login-btn"
+    [disabled]="selectedImageIndex === null"
+    (click)="login()"
+  >
+    登入
+  </button>
+</div>

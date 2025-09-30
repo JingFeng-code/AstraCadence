@@ -1,0 +1,193 @@
+<div class="page-wrapper">
+  <div class="glass-container" *ngIf="!showGantt">
+    <!-- 使用者卡片：絕對定位在左上角 -->
+    <div *ngIf="currentUser" class="user-card d-flex align-items-center gap-2">
+      <img
+        [src]="currentUser.avatarUrl || 'assets/default-avatar.png'"
+        alt="User Avatar"
+        class="rounded-circle"
+        width="36"
+        height="36"
+      />
+      <div>
+        <div class="user-name" title="{{ currentUser.name || '訪客' }}">
+          {{ currentUser.name || "訪客" }}
+        </div>
+        <div class="user-email text-muted"></div>
+      </div>
+
+      <!-- 登出按鈕 -->
+      <button class="btn btn-sm btn-outline-danger ms-2" (click)="logout()">
+        登出
+      </button>
+    </div>
+
+    <!-- 任務區域 -->
+    <div class="task-area">
+      <h1>任務看板</h1>
+
+      <div class="button-group d-flex gap-2 mb-3">
+        <!-- 新增任務按鈕 -->
+        <button class="btn btn-primary" (click)="showAddTaskModal = true">
+          新增任務
+        </button>
+
+        <!-- 顯示甘特圖按鈕 -->
+        <button
+          class="btn btn-outline-success gantt-toggle-btn"
+          (click)="showGantt = !showGantt"
+          type="button"
+          aria-label="Toggle Gantt Chart"
+        >
+          {{ showGantt ? "返回任務列表" : "顯示甘特圖" }}
+        </button>
+      </div>
+
+      <div class="status-columns mt-4">
+        <section class="status-column" *ngFor="let status of statuses">
+          <h2>{{ statusLabels[status] }}</h2>
+          <div *ngFor="let task of getTasksByStatus(status)" class="task-card">
+            <div class="task-info">
+              <div>
+                <div class="task-title">{{ task.title }}</div>
+                <div class="task-due-date" *ngIf="task.start_date">
+                  開始時間：{{ task.start_date | date : "yyyy/MM/dd" }}
+                </div>
+                <div class="task-due-date" *ngIf="task.due_date">
+                  截止時間：{{ task.due_date | date : "yyyy/MM/dd" }}
+                </div>
+                <div class="task-note" *ngIf="task.note">
+                  備註：{{ task.note }}
+                </div>
+              </div>
+              <div *ngIf="task.due_date" class="days-left">
+                {{ calculateDaysLeft(task.due_date) }}
+              </div>
+            </div>
+
+            <div class="task-actions">
+              <button
+                class="btn btn-outline-primary"
+                [disabled]="task.status === 'todo'"
+                (click)="changeTaskStatus(task, 'todo')"
+              >
+                待辦
+              </button>
+              <button
+                class="btn btn-outline-warning"
+                [disabled]="task.status === 'doing'"
+                (click)="changeTaskStatus(task, 'doing')"
+              >
+                進行中
+              </button>
+              <button
+                class="btn btn-outline-success"
+                [disabled]="task.status === 'done'"
+                (click)="changeTaskStatus(task, 'done')"
+              >
+                已完成
+              </button>
+              <button
+                class="btn btn-outline-danger"
+                (click)="deleteTask(task)"
+                title="刪除任務"
+              >
+                &times;
+              </button>
+            </div>
+            <div class="task-creator" *ngIf="task.createdBy">
+              {{ task.createdBy }}
+            </div>
+          </div>
+
+          <p *ngIf="getTasksByStatus(status).length === 0" class="empty-text">
+            尚無任務
+          </p>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 浮動新增任務表單 Modal，放在 .glass-container 外面 -->
+<div
+  *ngIf="showAddTaskModal"
+  class="modal-backdrop"
+  (click)="showAddTaskModal = false"
+>
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <h3>新增任務</h3>
+    <form (submit)="addTask(); $event.preventDefault()">
+      <div class="form-row mb-2">
+        <label for="newTaskTitle">標題:</label>
+        <input
+          type="text"
+          class="form-control"
+          [(ngModel)]="newTaskTitle"
+          name="newTaskTitle"
+          placeholder="輸入新任務..."
+          required
+        />
+      </div>
+      <div class="form-row mb-2">
+        <label for="newTaskStartDate">開始日期:</label>
+        <input
+          type="date"
+          class="form-control"
+          [(ngModel)]="newTaskStartDate"
+          name="newTaskStartDate"
+        />
+      </div>
+      <div class="form-row mb-2">
+        <label for="newTaskDueDate">截止日期:</label>
+        <input
+          type="date"
+          class="form-control"
+          [(ngModel)]="newTaskDueDate"
+          name="newTaskDueDate"
+        />
+      </div>
+      <div class="form-row mb-3">
+        <label for="newTaskNote">備註:</label>
+        <textarea
+          class="form-control"
+          [(ngModel)]="newTaskNote"
+          name="newTaskNote"
+          placeholder="備註"
+          rows="4"
+        ></textarea>
+      </div>
+      <div class="d-flex gap-2">
+        <button
+          class="btn btn-primary flex-grow-1"
+          type="submit"
+          [disabled]="!newTaskTitle.trim()"
+        >
+          新增任務
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary flex-grow-1"
+          (click)="showAddTaskModal = false"
+        >
+          取消
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- 甘特圖浮層 -->
+<div *ngIf="showGantt" class="gantt-modal" (click)="showGantt = false">
+  <div class="gantt-content" (click)="$event.stopPropagation()">
+    <!-- 關閉甘特圖按鈕 -->
+    <div class="d-flex justify-content-end mb-3">
+      <button class="btn btn-outline-secondary" (click)="showGantt = false">
+        關閉甘特圖
+      </button>
+    </div>
+
+    <!-- 這裡會包含篩選 + gantt -->
+    <app-gantt-view [tasks]="tasks"></app-gantt-view>
+  </div>
+</div>

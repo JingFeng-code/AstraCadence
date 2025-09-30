@@ -1,0 +1,38 @@
+<!-- gantt-view.html -->
+
+<svg style="display: none;">
+  <defs>
+    <linearGradient id="doneGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2196f3;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#64b5f6;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="doingGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#9c27b0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ce93d8;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="todoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#b0bec5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#eceff1;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
+
+<!-- 新增 createdBy 篩選下拉選單 -->
+<div class="mb-3">
+  <label for="createdByFilter" class="form-label">篩選：</label>
+  <select
+    id="createdByFilter"
+    class="form-select"
+    [(ngModel)]="selectedCreatedBy"
+    (change)="onCreatedByChange()"
+  >
+    <option value="">全部</option>
+    <option *ngFor="let creator of createdByList" [value]="creator">
+      {{ creator }}
+    </option>
+  </select>
+</div>
+
+
+<!-- gantt 容器 -->
+<div id="gantt_here" [style.height]="ganttHeight" style="width: 100%;"></div>
