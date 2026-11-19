@@ -1,16 +1,16 @@
-# AstraCadence
+# AstraDraupnir
 
-## 名稱由來｜Astra Mythos
+## 名稱由來｜Astra Mythos 神器系列
 
-AstraCadence 的品牌靈感來自印度教濕婆（Shiva）的舞王形象 Nataraja。舞蹈所象徵的宇宙節奏與循環，借喻團隊任務的安排、推進與協作。
+**新品牌顯示名稱：AstraDraupnir**。目前 GitHub repository 仍是 [`JingFeng-code/AstraCadence`](https://github.com/JingFeng-code/AstraCadence)；這次僅更新品牌文字，尚未改 GitHub Repository 名稱。
 
-- **Astra**：星辰的意象，象徵知識、探索與方向。
-- **Cadence**：指節奏與步調，呼應本專案「團隊任務與進度協作」的用途。
-- **AstraCadence**：世界神話靈感的現代產品命名，並非神話人物名稱或古代語言的直譯。
+- **神器原型**：北歐神話中的金環 Draupnir。
+- **傳說中的能力與考證界線**：傳說每九夜產生八枚相同重量的新環；是週期象徵而非軟體已支援自動週期排程。
+- **軟體對應能力（現代品牌比喻）**：週期、團隊節奏與任務推進。
+- **實際產品定位**：團隊任務與進度管理。
+- **技術相容性**：Angular、Supabase、甘特圖及部署設定維持不變。
 
-此為節奏意象的創作借用，不是聲稱 Nataraja 是任務管理之神。
-
-> **GitHub 更名尚未執行**：目前儲存庫仍是 `JingFeng-code/team-task-system`。本次先統一 README 的對外品牌名稱，不修改 CLI、程式命名、部署或設定同步路徑；後續 GitHub Repository Settings 更名需另行完成。
+**全系列命名規範的唯一維護來源**：[Astra Mythos｜神器系列品牌規範](https://github.com/JingFeng-code/AstraLore/blob/main/06-%E5%8F%83%E8%80%83/Astra-Mythos/ASTRA_MYTHOS.md)，位於工程筆記庫 AstraLore；本專案不另存品牌規範副本。
 
 ---
 
