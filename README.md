@@ -1,10 +1,11 @@
 # AstraCadence
+
 ## 名稱由來｜Astra Mythos
 
 AstraCadence 的品牌靈感來自印度教濕婆（Shiva）的舞王形象 Nataraja。舞蹈所象徵的宇宙節奏與循環，借喻團隊任務的安排、推進與協作。
 
 - **Astra**：星辰的意象，象徵知識、探索與方向。
-- **Cadence**：Cadence 指節奏與步調，呼應本專案「團隊任務與進度協作」的用途。
+- **Cadence**：指節奏與步調，呼應本專案「團隊任務與進度協作」的用途。
 - **AstraCadence**：世界神話靈感的現代產品命名，並非神話人物名稱或古代語言的直譯。
 
 此為節奏意象的創作借用，不是聲稱 Nataraja 是任務管理之神。
@@ -12,7 +13,6 @@ AstraCadence 的品牌靈感來自印度教濕婆（Shiva）的舞王形象 Nata
 > **GitHub 更名尚未執行**：目前儲存庫仍是 `JingFeng-code/team-task-system`。本次先統一 README 的對外品牌名稱，不修改 CLI、程式命名、部署或設定同步路徑；後續 GitHub Repository Settings 更名需另行完成。
 
 ---
-
 
 > 一個以 Angular 20 為前端、Supabase 為後端 BaaS 架構的任務管理工具，支援 RWD 響應式介面，提供登入、任務清單、任務建立與修改等功能。
 
